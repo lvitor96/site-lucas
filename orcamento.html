@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faça seu orçamento | [Nome do Regente]</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">[Nome do Regente]</a>
+
+      <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+        <ul class="nav-list">
+          <li><a href="index.html">Quem sou eu</a></li>
+          <li><a href="portfolio.html">O que já fizemos</a></li>
+          <li class="has-dropdown">
+            <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+              Loja <span class="dropdown-caret" aria-hidden="true">&#9662;</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="loja/partituras.html">Partituras</a></li>
+              <li><a href="loja/kits.html">Kits de ensaio</a></li>
+              <li><a href="loja/arranjos.html">Arranjos</a></li>
+            </ul>
+          </li>
+          <li><a href="orcamento.html" aria-current="page">Faça seu orçamento</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="container">
+      <div class="page-hero">
+        <h1>Faça seu orçamento</h1>
+        <p>[Placeholder: instrução curta explicando o que preencher e como funciona o envio.]</p>
+      </div>
+
+      <section aria-labelledby="form-title">
+        <h2 class="section-title" id="form-title">Dados do orçamento</h2>
+
+        <!--
+          Formulário ainda sem lógica de envio (Netlify Forms / wa.me).
+          Isso será implementado na próxima etapa, junto com o formulário
+          estático espelhado exigido pela Netlify e o honeypot/reCAPTCHA.
+        -->
+        <form>
+          <div class="form-field">
+            <label for="tipo-material">Tipo de material desejado</label>
+            <select id="tipo-material" name="tipo-material">
+              <option value="">[Placeholder: selecione uma opção]</option>
+              <option value="partitura">Partitura</option>
+              <option value="kit">Kit de ensaio</option>
+              <option value="arranjo">Arranjo</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="formato">Formato</label>
+            <input type="text" id="formato" name="formato" placeholder="[Placeholder: ex. PDF, impresso, instrumentação específica]" />
+          </div>
+
+          <div class="form-field">
+            <label for="referencia">Referência</label>
+            <small>[Placeholder: link, nome da obra ou descrição de referência]</small>
+            <textarea id="referencia" name="referencia"></textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="comentarios">Comentários</label>
+            <textarea id="comentarios" name="comentarios"></textarea>
+          </div>
+
+          <button type="button" class="form-submit-placeholder" disabled>Enviar (em breve)</button>
+          <p class="form-note">[Placeholder: envio ainda não implementado — virá com Netlify Forms + confirmação via WhatsApp.]</p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-contact">
+        <a href="contato.html">WhatsApp (placeholder)</a>
+        <a href="contato.html">Instagram (placeholder)</a>
+      </div>
+      <p class="footer-note">© 2026 [Nome do Regente]. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
