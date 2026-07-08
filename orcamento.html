@@ -50,9 +50,9 @@
 
         <!--
           Envio via Netlify Forms. O redirecionamento pós-envio (action)
-          leva a confirmacao.html. O link wa.me pré-preenchido ainda não
-          foi implementado — fica para depois de confirmar que o envio
-          por e-mail funciona sozinho.
+          leva a confirmacao.html, que também monta o link wa.me
+          pré-preenchido a partir dos dados salvos no sessionStorage
+          pelo script logo abaixo.
         -->
         <form name="orcamento" method="POST" action="/confirmacao.html" data-netlify="true" data-netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="orcamento" />
@@ -62,9 +62,19 @@
           </p>
 
           <div class="form-field">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" required />
+          </div>
+
+          <div class="form-field">
+            <label for="telefone">Telefone para contato (com DDD)</label>
+            <input type="tel" id="telefone" name="telefone" required />
+          </div>
+
+          <div class="form-field">
             <label for="tipo-material">Tipo de material desejado</label>
-            <select id="tipo-material" name="tipo-material">
-              <option value="">[Placeholder: selecione uma opção]</option>
+            <select id="tipo-material" name="tipo-material" required>
+              <option value="">Selecione uma opção</option>
               <option value="partitura">Partitura</option>
               <option value="kit">Kit de ensaio</option>
               <option value="arranjo">Arranjo</option>
@@ -74,23 +84,53 @@
 
           <div class="form-field">
             <label for="formato">Formato</label>
-            <input type="text" id="formato" name="formato" placeholder="[Placeholder: ex. PDF, impresso, instrumentação específica]" />
+            <select id="formato" name="formato">
+              <option value="">Selecione uma opção</option>
+              <option value="vocal-misto">Vocal misto, masculino ou feminino (quatro vozes escritas)</option>
+              <option value="instrumental">Instrumental (banda, orquestra ou outra formação instrumental)</option>
+              <option value="vocal-piano">Vocal + piano (com base cifrada)</option>
+              <option value="vocal-piano-outros">Vocal + piano + outros instrumentos</option>
+              <option value="lead-sheet">Lead sheet (melodia cifrada)</option>
+              <option value="outro">Outro (especifique na descrição)</option>
+            </select>
           </div>
 
           <div class="form-field">
             <label for="referencia">Referência</label>
-            <small>[Placeholder: link, nome da obra ou descrição de referência]</small>
-            <textarea id="referencia" name="referencia"></textarea>
+            <small>Insira um link do YouTube, se houver.</small>
+            <input type="text" id="referencia" name="referencia" />
           </div>
 
           <div class="form-field">
-            <label for="comentarios">Comentários</label>
-            <textarea id="comentarios" name="comentarios"></textarea>
+            <label for="descricao">Descrição do seu pedido</label>
+            <small>Insira aqui todas as informações a respeito do que você vai querer. Não poupe nenhum detalhe.</small>
+            <textarea id="descricao" name="descricao" required></textarea>
           </div>
 
           <button type="submit" class="form-submit">Enviar</button>
-          <p class="form-note">[Placeholder: confirmação via WhatsApp ainda não implementada — virá em etapa futura.]</p>
+          <p class="form-note">Após enviar, você também poderá confirmar o pedido pelo WhatsApp.</p>
         </form>
+
+        <script>
+          (function () {
+            var form = document.querySelector('form[name="orcamento"]');
+            if (!form) return;
+
+            form.addEventListener('submit', function () {
+              var tipoSelect = form.elements['tipo-material'];
+              var formatoSelect = form.elements['formato'];
+
+              var dados = {
+                nome: form.elements['nome'].value,
+                telefone: form.elements['telefone'].value,
+                tipo: tipoSelect.value ? tipoSelect.options[tipoSelect.selectedIndex].text : '',
+                formato: formatoSelect.value ? formatoSelect.options[formatoSelect.selectedIndex].text : ''
+              };
+
+              sessionStorage.setItem('orcamentoWhatsapp', JSON.stringify(dados));
+            });
+          })();
+        </script>
       </section>
     </div>
   </main>

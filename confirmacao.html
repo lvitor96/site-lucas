@@ -45,6 +45,8 @@
         <p>Obrigado pelo contato. Recebemos os detalhes do seu pedido e retornaremos em breve.</p>
       </div>
 
+      <div id="whatsapp-cta"></div>
+
       <a href="index.html" class="form-submit">Voltar</a>
     </div>
   </main>
@@ -60,5 +62,40 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      var raw = sessionStorage.getItem('orcamentoWhatsapp');
+      if (!raw) return;
+
+      var dados;
+      try {
+        dados = JSON.parse(raw);
+      } catch (e) {
+        return;
+      }
+
+      var mensagem = 'Olá! Meu nome é ' + dados.nome + '. Telefone: ' + dados.telefone + '. Tipo de material: ' + dados.tipo + '.';
+      if (dados.formato) {
+        mensagem += ' Formato: ' + dados.formato + '.';
+      }
+      mensagem += ' Detalhes completos enviados por e-mail.';
+
+      var container = document.getElementById('whatsapp-cta');
+      if (!container) return;
+
+      var intro = document.createElement('p');
+      intro.textContent = 'Para agilizar o atendimento, confirme seu pedido pelo WhatsApp:';
+
+      var link = document.createElement('a');
+      link.href = 'https://wa.me/5592991114975?text=' + encodeURIComponent(mensagem);
+      link.className = 'form-submit';
+      link.textContent = 'Confirmar pelo WhatsApp';
+      link.target = '_blank';
+      link.rel = 'noopener';
+
+      container.appendChild(intro);
+      container.appendChild(link);
+    })();
+  </script>
 </body>
 </html>
