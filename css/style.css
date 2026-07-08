@@ -519,13 +519,68 @@ section + section {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--color-accent-dark);
+  cursor: pointer;
+}
+
+.audio-placeholder__icon:disabled {
+  cursor: not-allowed;
+  color: var(--color-text-muted);
+  background: var(--color-placeholder-bg);
 }
 
 .audio-placeholder__bar {
   flex: 1;
   height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
   background: var(--color-placeholder-border);
   border-radius: 2px;
+  cursor: pointer;
+}
+
+.audio-placeholder__bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--color-accent-dark);
+  cursor: pointer;
+}
+
+.audio-placeholder__bar::-moz-range-track {
+  height: 4px;
+  background: var(--color-placeholder-border);
+  border-radius: 2px;
+}
+
+.audio-placeholder__bar::-moz-range-thumb {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--color-accent-dark);
+  border: none;
+  cursor: pointer;
+}
+
+.audio-placeholder__bar:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.audio-placeholder__bar:disabled::-webkit-slider-thumb {
+  background: var(--color-text-muted);
+}
+
+.audio-placeholder__bar:disabled::-moz-range-thumb {
+  background: var(--color-text-muted);
+}
+
+.audio-placeholder__time {
+  white-space: nowrap;
 }
 
 /* Player multi-faixa (kits de ensaio: soprano/contralto/tenor/baixo) */

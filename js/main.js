@@ -79,4 +79,88 @@
       event.preventDefault();
     });
   });
+
+  // Players de áudio da Loja (partituras/kits/arranjos). Cada .audio-placeholder
+  // vira um player funcional se o <audio> tiver data-audio-src preenchido;
+  // enquanto vazio (hoje, em todos), fica desabilitado com "Áudio em breve".
+  // Só um player toca por vez em toda a página.
+  var audioPlayers = document.querySelectorAll('.audio-placeholder');
+
+  function formatAudioTime(seconds) {
+    if (!isFinite(seconds) || seconds < 0) seconds = 0;
+    var mins = Math.floor(seconds / 60);
+    var secs = Math.floor(seconds % 60);
+    return mins + ':' + (secs < 10 ? '0' : '') + secs;
+  }
+
+  audioPlayers.forEach(function (player) {
+    var audio = player.querySelector('audio');
+    var button = player.querySelector('.audio-placeholder__icon');
+    var icon = button ? button.querySelector('span') : null;
+    var bar = player.querySelector('.audio-placeholder__bar');
+    var timeLabel = player.querySelector('.audio-placeholder__time');
+
+    if (!audio || !button || !icon || !bar || !timeLabel) return;
+
+    var src = audio.getAttribute('data-audio-src');
+
+    if (!src) {
+      button.disabled = true;
+      bar.disabled = true;
+      timeLabel.textContent = 'Áudio em breve';
+      return;
+    }
+
+    audio.src = src;
+    button.disabled = false;
+    bar.disabled = false;
+    bar.value = 0;
+    timeLabel.textContent = formatAudioTime(0) + ' / ' + formatAudioTime(0);
+
+    button.addEventListener('click', function () {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener('play', function () {
+      audioPlayers.forEach(function (other) {
+        if (other === player) return;
+        var otherAudio = other.querySelector('audio');
+        if (otherAudio && !otherAudio.paused) {
+          otherAudio.pause();
+        }
+      });
+      icon.textContent = '⏸';
+      button.setAttribute('aria-label', 'Pausar preview');
+    });
+
+    audio.addEventListener('pause', function () {
+      icon.textContent = '▶';
+      button.setAttribute('aria-label', 'Reproduzir preview');
+    });
+
+    audio.addEventListener('loadedmetadata', function () {
+      bar.max = audio.duration;
+      timeLabel.textContent = formatAudioTime(audio.currentTime) + ' / ' + formatAudioTime(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', function () {
+      bar.value = audio.currentTime;
+      timeLabel.textContent = formatAudioTime(audio.currentTime) + ' / ' + formatAudioTime(audio.duration);
+    });
+
+    bar.addEventListener('input', function () {
+      audio.currentTime = bar.value;
+    });
+
+    audio.addEventListener('ended', function () {
+      audio.currentTime = 0;
+      bar.value = 0;
+      icon.textContent = '▶';
+      button.setAttribute('aria-label', 'Reproduzir preview');
+    });
+  });
 })();
