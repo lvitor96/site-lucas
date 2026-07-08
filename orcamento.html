@@ -49,11 +49,18 @@
         <h2 class="section-title" id="form-title">Dados do orçamento</h2>
 
         <!--
-          Formulário ainda sem lógica de envio (Netlify Forms / wa.me).
-          Isso será implementado na próxima etapa, junto com o formulário
-          estático espelhado exigido pela Netlify e o honeypot/reCAPTCHA.
+          Envio via Netlify Forms. O redirecionamento pós-envio (action)
+          leva a confirmacao.html. O link wa.me pré-preenchido ainda não
+          foi implementado — fica para depois de confirmar que o envio
+          por e-mail funciona sozinho.
         -->
-        <form>
+        <form name="orcamento" method="POST" action="/confirmacao.html" data-netlify="true" data-netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="orcamento" />
+
+          <p class="hp-field">
+            <label>Não preencha este campo se você for humano: <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+
           <div class="form-field">
             <label for="tipo-material">Tipo de material desejado</label>
             <select id="tipo-material" name="tipo-material">
@@ -81,8 +88,8 @@
             <textarea id="comentarios" name="comentarios"></textarea>
           </div>
 
-          <button type="button" class="form-submit-placeholder" disabled>Enviar (em breve)</button>
-          <p class="form-note">[Placeholder: envio ainda não implementado — virá com Netlify Forms + confirmação via WhatsApp.]</p>
+          <button type="submit" class="form-submit">Enviar</button>
+          <p class="form-note">[Placeholder: confirmação via WhatsApp ainda não implementada — virá em etapa futura.]</p>
         </form>
       </section>
     </div>

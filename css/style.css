@@ -78,6 +78,15 @@ h1, h2, h3 {
   top: 0.5rem;
 }
 
+/* Honeypot do formulário de orçamento: escondido do visual sem display:none,
+   para permanecer acessível a leitores de tela (que leem a instrução de
+   deixar o campo em branco) em vez de ser simplesmente removido da árvore. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
 /* ==========================================================================
    Header / navegação
    ========================================================================== */
@@ -586,14 +595,16 @@ section + section {
   min-height: 6rem;
 }
 
-.form-submit-placeholder {
+.form-submit {
+  display: inline-block;
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius);
-  border: 1px solid var(--color-border);
-  background: var(--color-placeholder-bg);
-  color: var(--color-text-muted);
+  border: 1px solid var(--color-accent-dark);
+  background: var(--color-accent-dark);
+  color: #fff;
   font: inherit;
-  cursor: not-allowed;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .form-note {
