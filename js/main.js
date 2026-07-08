@@ -67,4 +67,16 @@
   if (desktopQuery.addEventListener) {
     desktopQuery.addEventListener('change', handleBreakpointChange);
   }
+
+  // Deterrente simples de proteção dos previews da Loja — não é proteção
+  // real, só bloqueia clique direito e arrastar (ver .preview-protected em style.css).
+  var protectedPreviews = document.querySelectorAll('.preview-protected');
+  protectedPreviews.forEach(function (el) {
+    el.addEventListener('contextmenu', function (event) {
+      event.preventDefault();
+    });
+    el.addEventListener('dragstart', function (event) {
+      event.preventDefault();
+    });
+  });
 })();
