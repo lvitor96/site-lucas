@@ -34,7 +34,8 @@ body {
   font-family: var(--font-base);
   color: var(--color-text);
   background: var(--color-bg);
-  line-height: 1.5;
+  font-size: 1.1rem;
+  line-height: 1.7;
 }
 
 img {
@@ -364,6 +365,65 @@ section + section {
 
 .bio-text p {
   color: var(--color-text);
+}
+
+.bio-text::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.bio-pair {
+  display: flow-root;
+}
+
+.bio-text p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+.bio-subsection {
+  margin-top: 2rem;
+}
+
+.subsection-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.bio-subsection p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+.bio-photo {
+  float: none;
+  width: 100%;
+  margin: 0 0 1rem;
+}
+
+@media (min-width: 60rem) {
+  .bio-photo {
+    width: 37%;
+  }
+
+  .bio-photo--left {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+  }
+
+  .bio-photo--right {
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+  }
 }
 
 /* Fotos / grid simples */
