@@ -404,6 +404,54 @@ section + section {
   -ms-hyphens: auto;
 }
 
+.bio-video {
+  margin: 2rem 0;
+}
+
+.bio-video__trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: none;
+  background: #000;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.bio-video__thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bio-video__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+
+.bio-video__caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.bio-video__iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 .bio-photo {
   float: none;
   width: 100%;
@@ -423,6 +471,12 @@ section + section {
   .bio-photo--right {
     float: right;
     margin: 0 0 1rem 1.5rem;
+  }
+
+  .bio-video {
+    max-width: 65%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

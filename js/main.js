@@ -163,4 +163,19 @@
       button.setAttribute('aria-label', 'Reproduzir preview');
     });
   });
+
+  document.querySelectorAll('.bio-video__trigger').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var wrapper = btn.closest('.bio-video');
+      var videoId = wrapper.getAttribute('data-yt-id');
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+      iframe.title = wrapper.querySelector('.bio-video__caption').textContent;
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.className = 'bio-video__iframe';
+      wrapper.style.position = 'relative';
+      btn.replaceWith(iframe);
+    });
+  });
 })();
