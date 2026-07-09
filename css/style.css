@@ -362,6 +362,10 @@ section + section {
   color: var(--color-text-muted);
 }
 
+.bio-text p {
+  color: var(--color-text);
+}
+
 /* Fotos / grid simples */
 .photo-grid,
 .card-grid {
