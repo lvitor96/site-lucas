@@ -464,6 +464,13 @@ section + section {
   float: none;
   width: 100%;
   margin: 0 0 1rem;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.bio-photo--top {
+  object-position: center 15%;
 }
 
 @media (min-width: 60rem) {
